@@ -1,0 +1,35 @@
+﻿@model List<CityViewModel>
+
+@{
+    Layout = "_AdminLayout";
+}
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success mt-5">
+        @ViewBag.message
+    </div>
+}
+
+@if (Model != null)
+{
+    <h2 class="text-center mt-2">Şehirler</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Şehir Adı</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var city in Model)
+            {
+                <tr>
+                    <td>@city.CityId</td>
+                    <td>@city.CityName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a class="btn btn-info" href="/Admin/AddCity">Yeni Şehir Ekle</a>
+}

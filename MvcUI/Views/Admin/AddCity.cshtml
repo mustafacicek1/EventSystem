@@ -1,0 +1,22 @@
+﻿@model CreateCityModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<h2 class="text-center mt-2">Şehir Ekleme Formu</h2>
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label" for="CityName">Şehir Adı</label>
+        <input type="text" class="form-control" name="CityName" />
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Ekle</button>
+    </div>
+</form>
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success mt-5">
+        @ViewBag.message
+    </div>
+}

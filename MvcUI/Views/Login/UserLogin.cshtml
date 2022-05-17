@@ -1,0 +1,30 @@
+﻿@model TokenViewModel
+
+<h2 class="text-center mt-2">Giriş Formu</h2>
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label" for="Mail">Mail Adresi</label>
+        <input type="email" class="form-control" name="Mail" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="Password">Şifre</label>
+        <input type="password" class="form-control" name="Password" />
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Giriş Yap</button>
+    </div>
+</form>
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success mt-5">
+        @ViewBag.message
+    </div>
+}
+@if (ViewBag.message == "Giriş başarılı")
+{
+    <div class="text-center">
+        <a class="btn btn-warning btn-lg" href="/Admin/GetCategories">Admin Paneli</a>
+        <a class="btn btn-info btn-lg" href="#">Organizatör Paneli</a>
+        <a class="btn btn-success btn-lg" href="#">Katılımcı Paneli</a>
+    </div>
+}
