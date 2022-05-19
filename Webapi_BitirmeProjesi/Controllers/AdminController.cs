@@ -7,10 +7,12 @@ using Webapi_BitirmeProjesi.DTOs;
 using Webapi_BitirmeProjesi.Operations.AdminOperations.CategoryOperations.CreateCategory;
 using Webapi_BitirmeProjesi.Operations.AdminOperations.CategoryOperations.DeleteCategory;
 using Webapi_BitirmeProjesi.Operations.AdminOperations.CategoryOperations.GetCategories;
+using Webapi_BitirmeProjesi.Operations.AdminOperations.CategoryOperations.GetCategoryDetail;
 using Webapi_BitirmeProjesi.Operations.AdminOperations.CategoryOperations.UpdateCategory;
 using Webapi_BitirmeProjesi.Operations.AdminOperations.CityOperations.CreateCity;
 using Webapi_BitirmeProjesi.Operations.AdminOperations.CityOperations.DeleteCity;
 using Webapi_BitirmeProjesi.Operations.AdminOperations.CityOperations.GetCities;
+using Webapi_BitirmeProjesi.Operations.AdminOperations.CityOperations.GetCityDetail;
 using Webapi_BitirmeProjesi.Operations.AdminOperations.CityOperations.UpdateCity;
 
 namespace Webapi_BitirmeProjesi.Controllers
@@ -31,6 +33,17 @@ namespace Webapi_BitirmeProjesi.Controllers
         public IActionResult GetCategories()
         {
             GetCategoriesQuery query = new GetCategoriesQuery(_dbContext);
+            var result = query.Handle();
+            return Ok(result);
+        }
+
+        [HttpGet("categories/{id}")]
+        public IActionResult GetCategoryById(int id)
+        {
+            GetCategoryDetailQuery query = new GetCategoryDetailQuery(_dbContext);
+            query.CategoryId=id;
+            GetCategoryDetailQueryValidator validator = new GetCategoryDetailQueryValidator();
+            validator.ValidateAndThrow(query);
             var result = query.Handle();
             return Ok(result);
         }
@@ -73,6 +86,17 @@ namespace Webapi_BitirmeProjesi.Controllers
         public IActionResult GetCities()
         {
             GetCitiesQuery query = new GetCitiesQuery(_dbContext);
+            var result = query.Handle();
+            return Ok(result);
+        }
+        
+        [HttpGet("cities/{id}")]
+        public IActionResult GetCityById(int id)
+        {
+            GetCityDetailQuery query = new GetCityDetailQuery(_dbContext);
+            query.CityId = id;
+            GetCityDetailQueryValidator validator = new GetCityDetailQueryValidator();
+            validator.ValidateAndThrow(query);
             var result = query.Handle();
             return Ok(result);
         }

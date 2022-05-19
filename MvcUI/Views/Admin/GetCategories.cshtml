@@ -14,11 +14,13 @@
 @if (Model != null)
 {
     <h2 class="text-center mt-2">Kategoriler</h2>
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Kategori Adı</th>
+                <th>Güncelle</th>
+                <th>Sil</th>
             </tr>
         </thead>
         <tbody>
@@ -27,8 +29,11 @@
                 <tr>
                     <td>@category.CategoryId</td>
                     <td>@category.CategoryName</td>
+                    <td><a class="btn btn-warning" href="/Admin/UpdateCategory/@category.CategoryId">Güncelle</a></td>
+                    <td><a class="btn btn-danger" href="/Admin/DeleteCategory/@category.CategoryId">Sil</a></td>
                 </tr>
             }
         </tbody>
     </table>
+    <a class="btn btn-info" href="/Admin/AddCategory">Yeni Kategori Ekle</a>
 }

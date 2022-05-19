@@ -1,0 +1,26 @@
+﻿@model CityViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<h2 class="text-center mt-2">Şehir Güncelleme Formu</h2>
+@using (Html.BeginForm("UpdateCity","Admin",FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="mb-3">
+        @Html.Label("Şehir Adı")
+        @Html.TextBoxFor(m=>m.CityName, new { @class = "form-control" })
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Güncelle</button>
+        <a class="btn btn-danger" href="/Admin/GetCities" >Vazgeç</a>
+    </div>
+    </div>
+}
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success mt-5">
+        @ViewBag.message
+    </div>
+}

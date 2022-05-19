@@ -11,14 +11,16 @@
     </div>
 }
 
-@if (Model != null)
+@if (Model!=null)
 {
     <h2 class="text-center mt-2">Şehirler</h2>
-    <table class="table">
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Şehir Adı</th>
+                <th>Güncelle</th>
+                <th>Sil</th>
             </tr>
         </thead>
         <tbody>
@@ -27,6 +29,8 @@
                 <tr>
                     <td>@city.CityId</td>
                     <td>@city.CityName</td>
+                    <td><a class="btn btn-warning" href="/Admin/UpdateCity/@city.CityId">Güncelle</a></td>
+                    <td><a class="btn btn-danger" href="/Admin/DeleteCity/@city.CityId">Sil</a></td>  
                 </tr>
             }
         </tbody>

@@ -1,0 +1,37 @@
+﻿@model CategoryViewModel
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<h3 class="text-center">Seçilen Kategoriyi silmek istediğinize emin misiniz?</h3>
+<div class="text-center">
+    <h4>Kategori Bilgileri</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+    </dl>
+    
+    <form asp-action="DeleteCategory">
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        <a class="btn btn-dark" asp-action="GetCategories">Vazgeç</a>
+    </form>
+</div>
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success mt-5">
+        @ViewBag.message
+    </div>
+}
+
