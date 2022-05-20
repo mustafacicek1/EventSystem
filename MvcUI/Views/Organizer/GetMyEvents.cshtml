@@ -1,0 +1,49 @@
+﻿@model List<EventViewModel>
+
+@{
+    Layout = "_OrganizerLayout";
+}
+
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-danger mt-5">
+        @ViewBag.message
+    </div>
+}
+
+@if (Model != null)
+{
+    <a class="btn btn-info mb-3" href="/Organizer/CreateEvent">Yeni Etklinlik Oluştur</a>
+    <div class="row">
+        @foreach (var evnt in Model)
+        {
+            <div class="col-md-6 mb-3">
+                <div class="card" style="border:1px solid green">
+                    <div class="card-header" style="color:red">
+                        <h5 class="card-title">@evnt.EventName</h5>
+                    </div>
+                    <div class="card-body" style="background-color:#d2d5ff">
+                        <p class="card-text">Kategori = @evnt.Category</p>
+                        <p class="card-text">Şehir = @evnt.City</p>
+                        <p class="card-text">Adres = @evnt.Address</p>
+                        <p class="card-text">Oluşturan = @evnt.OrganizerName</p>
+                        <p class="card-text">Kontenjan Sayısı = @evnt.MaxParticipant</p>
+                        <p class="card-text">Katılımcı Sayısı = @evnt.ParticipantCount</p>
+                        <p class="card-text">Etkinlik Ücreti = @evnt.TicketPrice ₺</p>
+                        <p class="card-text">Etkinlik Açıklaması = @evnt.Description</p>
+                        <p class="card-text">Etkinlik Tarihi = @evnt.EventDate.ToShortDateString()</p>
+                        <p class="card-text">Son Başvuru Tarihi @evnt.LastApplicationDate.ToShortDateString()</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group">
+                            <a class="btn btn-warning" href="/Organizer/UpdateEvent/@evnt.EventId">Düzenle</a>
+                            <a class="btn btn-danger" href="/Organizer/CancelEvent/@evnt.EventId">İptal Et</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+}

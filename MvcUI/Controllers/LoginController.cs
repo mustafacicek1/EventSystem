@@ -67,5 +67,56 @@ namespace MvcUI.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public IActionResult CompanyRegister()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CompanyRegister(CompanyRegisterModel model)
+        {
+            string content = JsonConvert.SerializeObject(model);
+            StringContent stringContent = new StringContent(content, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await _client.PostAsync("company/register", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                ViewBag.message = "Kayıt başarılı";
+            }
+            else
+            {
+                string message = await responseMessage.Content.ReadAsStringAsync();
+                ViewBag.message = message;
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult CompanyLogin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CompanyLogin(CompanyLoginModel model)
+        {
+            string content = JsonConvert.SerializeObject(model);
+            StringContent stringContent = new StringContent(content, Encoding.UTF8, "application/json");
+            HttpResponseMessage responseMessage = await _client.PostAsync("company/login", stringContent);
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var tokenModel = await responseMessage.Content.ReadAsStringAsync();
+                TokenViewModel tokenViewModel = JsonConvert.DeserializeObject<TokenViewModel>(tokenModel);
+                HttpContext.Session.SetString("token", tokenViewModel.Token);
+                return RedirectToAction("GetEvents", "Company");
+            }
+            else
+            {
+                string message = await responseMessage.Content.ReadAsStringAsync();
+                ViewBag.message = message;
+                return View();
+            }   
+        }
     }
 }

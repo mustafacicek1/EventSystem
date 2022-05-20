@@ -40,14 +40,14 @@ namespace Webapi_BitirmeProjesi.Middlewares
             string message = "Internal Server Error";
 
             List<ValidationFailure> errors;
+            List<string> errDetail = new List<string>();
             if (ex.GetType() == typeof(ValidationException))
             {
                 httpContext.Response.StatusCode = 400;
                 errors = ((ValidationException)ex).Errors.ToList();
-                List<string> errDetail = new List<string>();
                 foreach (var error in errors)
                 {
-                    errDetail.Add(error.PropertyName+": "+error.ErrorMessage);
+                    errDetail.Add(error.ErrorMessage);
                 }
                 var errResult = JsonConvert.SerializeObject(new {Errors=errDetail},Formatting.None);
                 return httpContext.Response.WriteAsync(errResult);
@@ -55,13 +55,14 @@ namespace Webapi_BitirmeProjesi.Middlewares
 
             if (ex.GetType()==typeof(InvalidOperationException))
             {
-                message = ex.Message;
+                errDetail.Add(ex.Message);
                 httpContext.Response.StatusCode = 400;
-                var errResult = JsonConvert.SerializeObject(new { Error = message }, Formatting.None);
+                var errResult = JsonConvert.SerializeObject(new { Errors = errDetail }, Formatting.None);
                 return httpContext.Response.WriteAsync(errResult);
             }
 
-            var result = JsonConvert.SerializeObject(new { Error = message }, Formatting.None);
+            errDetail.Add(message);
+            var result = JsonConvert.SerializeObject(new { Errors = errDetail }, Formatting.None);
             return httpContext.Response.WriteAsync(result);
         }
     }

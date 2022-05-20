@@ -35,6 +35,7 @@ namespace Webapi_BitirmeProjesi.Operations.OrganizerOperations.GetMyEvents
                                             join user in _dbContext.Users
                                             on organizer.UserId equals user.Id
                                             where ev.OrganizerId ==authOrganizer.Id
+                                            &&ev.EventStatus==true
                                             select new EventsViewModel
                                             {
                                                 EventId = ev.Id,

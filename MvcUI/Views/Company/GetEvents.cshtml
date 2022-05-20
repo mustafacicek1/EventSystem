@@ -1,0 +1,44 @@
+﻿@model List<EventViewModel>
+
+@{
+    Layout = "_CompanyLayout";
+}
+
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-danger mt-5">
+        @ViewBag.message
+    </div>
+}
+
+@if (Model != null)
+{
+    <div class="row">
+        @foreach (var evnt in Model)
+        {
+            <div class="col-md-6 mb-3">
+                <div class="card" style="border:1px solid green">
+                    <div class="card-header" style="color:red">
+                        <h5 class="card-title">@evnt.EventName</h5>
+                    </div>
+                    <div class="card-body" style="background-color:#d2d5ff">
+                        <p class="card-text">Kategori = @evnt.Category</p>
+                        <p class="card-text">Şehir = @evnt.City</p>
+                        <p class="card-text">Adres = @evnt.Address</p>
+                        <p class="card-text">Oluşturan = @evnt.OrganizerName</p>
+                        <p class="card-text">Kontenjan Sayısı = @evnt.MaxParticipant</p>
+                        <p class="card-text">Katılımcı Sayısı = @evnt.ParticipantCount</p>
+                        <p class="card-text">Etkinlik Ücreti = @evnt.TicketPrice ₺</p>
+                        <p class="card-text">Etkinlik Açıklaması = @evnt.Description</p>
+                    </div>
+                    <div class="card-footer">
+                        <small class="text-muted">Etkinlik Tarihi = @evnt.EventDate.ToShortDateString()</small>
+                        <br>
+                        <small class="text-muted">Son Başvuru Tarihi @evnt.LastApplicationDate.ToShortDateString()</small>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

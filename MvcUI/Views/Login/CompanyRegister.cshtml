@@ -1,0 +1,28 @@
+﻿<h2 class="text-center mt-2">Şirket Kayıt Formu</h2>
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label" for="CompanyName">Şirket Adı</label>
+        <input type="text" class="form-control" name="CompanyName" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="Domain">Domain Adresi</label>
+        <input type="text" class="form-control" name="Domain" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="Mail">Mail Adresi</label>
+        <input type="email" class="form-control" name="Mail" />
+    </div>
+     <div class="mb-3">
+        <label class="form-label" for="Password">Şifre</label>
+        <input type="password" class="form-control" name="Password" />
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Kayıt Ol</button>
+    </div>
+</form>
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-success mt-5">
+        @ViewBag.message
+    </div>
+}

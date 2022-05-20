@@ -1,0 +1,79 @@
+﻿@model CreateEventModel
+
+@{
+    Layout = "_OrganizerLayout";
+}
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<h2 class="text-center mt-2">Etkinlik Ekleme Formu</h2>
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label" for="Name">Etkinlik Adı</label>
+        <input type="text" class="form-control" name="Name" />
+    </div>
+    <div class="mb-3">
+        @Html.Label("Kategori")
+        @Html.DropDownListFor(x=>x.CategoryId,(List<SelectListItem>)ViewBag.categories,new { @class = "form-control" })
+    </div>
+    <div class="mb-3">
+        @Html.Label("Şehir")
+        @Html.DropDownListFor(x=>x.CityId,(List<SelectListItem>)ViewBag.cities,new { @class = "form-control" })
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="Address">Adres</label>
+        <textarea cols=5 type="text" class="form-control" name="Address"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="Description">Açıklama</label>
+        <textarea cols=5 type="text" class="form-control" name="Description"></textarea>
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="MaxParticipant">Kontenjan</label>
+        <input type="number" class="form-control" name="MaxParticipant" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="EventDate">Etkinlik Tarihi</label>
+        <input type="date" class="form-control" name="EventDate" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="LastApplicationDate">Son Başvuru Tarihi</label>
+        <input type="date" class="form-control" name="LastApplicationDate" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label" for="IsItPaid">Etkinlik Biletli Mi?: </label>
+        <select id="IsItPaid" class="form-select" name="IsItPaid">
+            <option value="true">Evet</option>
+            <option value="false">Hayır</option>
+        </select>
+    </div>
+    <div id="ticketPrice" class="mb-3">
+        <label class="form-label" for="TicketPrice">Bilet Ücreti</label>
+        <input type="text" class="form-control" name="TicketPrice" />
+    </div>
+    <div class="mb-3">
+        <button type="submit" class="btn btn-success">Ekle</button>
+        <a class="btn btn-danger" href="/Organizer/GetMyEvents">Vazgeç</a>
+    </div>
+</form>
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-info mt-5">
+        @ViewBag.message
+    </div>
+}
+
+<script>
+    $(document).ready(function(){
+        $("#IsItPaid").change(function(){
+            if($(this).val()=="false")
+            {
+                $("#ticketPrice").hide("slow");
+            }
+            else
+            {
+                $("#ticketPrice").show("slow");
+            }
+       });
+    });
+</script>

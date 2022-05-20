@@ -1,6 +1,6 @@
 ﻿@model TokenViewModel
 
-<h2 class="text-center mt-2">Kullanıcı Giriş Formu</h2>
+<h2 class="text-center mt-2">Şirket Giriş Formu</h2>
 <form method="post">
     <div class="mb-3">
         <label class="form-label" for="Mail">Mail Adresi</label>
@@ -18,13 +18,5 @@
 {
     <div class="alert alert-success mt-5">
         @ViewBag.message
-    </div>
-}
-@if (ViewBag.message == "Giriş başarılı")
-{
-    <div class="text-center">
-        <a class="btn btn-warning btn-lg" href="/Admin/GetCategories">Admin Paneli</a>
-        <a class="btn btn-info btn-lg" href="/Organizer/GetMyEvents">Organizatör Paneli</a>
-        <a class="btn btn-success btn-lg" href="#">Katılımcı Paneli</a>
     </div>
 }

@@ -276,5 +276,11 @@ namespace MvcUI.Controllers
             return View();
         }
 
+        public IActionResult LogOut()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("UserLogin", "Login");
+        }
+
     }
 }
