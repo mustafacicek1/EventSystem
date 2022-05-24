@@ -9,6 +9,7 @@ using Webapi_BitirmeProjesi.Operations.OrganizerOperations.CancelEvent;
 using Webapi_BitirmeProjesi.Operations.OrganizerOperations.CreateEvent;
 using Webapi_BitirmeProjesi.Operations.OrganizerOperations.GetCategoryList;
 using Webapi_BitirmeProjesi.Operations.OrganizerOperations.GetCityList;
+using Webapi_BitirmeProjesi.Operations.OrganizerOperations.GetEventDetail;
 using Webapi_BitirmeProjesi.Operations.OrganizerOperations.GetMyEvents;
 using Webapi_BitirmeProjesi.Operations.OrganizerOperations.UpdateEvent;
 
@@ -50,6 +51,17 @@ namespace Webapi_BitirmeProjesi.Controllers
         public IActionResult GetMyEvents()
         {
             GetMyEventsQuery query = new GetMyEventsQuery(_dbContext,_contextAccessor);
+            var result = query.Handle();
+            return Ok(result);
+        }
+
+        [HttpGet("events/{id}")]
+        public IActionResult GetEventDetail(int id)
+        {
+            GetEventDetailQuery query = new GetEventDetailQuery(_dbContext);
+            query.EventId = id;
+            GetEventDetailQueryValidator validator = new GetEventDetailQueryValidator();
+            validator.ValidateAndThrow(query);
             var result = query.Handle();
             return Ok(result);
         }

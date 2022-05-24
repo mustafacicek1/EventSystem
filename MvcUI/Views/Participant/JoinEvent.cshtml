@@ -1,0 +1,43 @@
+﻿@model EventViewModel
+
+@{
+    Layout = "_ParticipantLayout";
+}
+
+<h3 class="text-center mb-3">Seçilen etkinliğe katılmak istediğinize emin misiniz?</h3>
+<div class="row">
+    <div class="col-md-8 offset-2 mr-auto">
+        <form method="post">
+        <div class="card" style="border:1px solid green">
+            <div class="card-header" style="color:red">
+                <h5 class="card-title">@Model.EventName</h5>
+            </div>
+            <div class="card-body" style="background-color:#d2d5ff">
+                <p class="card-text">Kategori = @Model.Category</p>
+                <p class="card-text">Şehir = @Model.City</p>
+                <p class="card-text">Adres = @Model.Address</p>
+                <p class="card-text">Oluşturan = @Model.OrganizerName</p>
+                <p class="card-text">Kontenjan Sayısı = @Model.MaxParticipant</p>
+                <p class="card-text">Katılımcı Sayısı = @Model.ParticipantCount</p>
+                <p class="card-text">Etkinlik Ücreti = @Model.TicketPrice ₺</p>
+                <p class="card-text">Etkinlik Açıklaması = @Model.Description</p>
+                <p class="card-text">Etkinlik Tarihi = @Model.EventDate.ToShortDateString()</p>
+                <p class="card-text">Son Başvuru Tarihi @Model.LastApplicationDate.ToShortDateString()</p>
+            </div>
+            <div class="card-footer">
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-success">Onayla</button>
+                    <a class="btn btn-danger" href="/Participant/GetEvents">Vazgeç</a>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>
+
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-info mt-5">
+        @ViewBag.message
+    </div>
+}

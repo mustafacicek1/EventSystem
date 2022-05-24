@@ -1,0 +1,30 @@
+﻿@model EventViewModel
+
+@{
+    Layout = "_OrganizerLayout";
+}
+
+<h2 class="text-center mt-2">Event Güncelleme Formu</h2>
+@using (Html.BeginForm("UpdateEvent", "Organizer", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="mb-3">
+            @Html.Label("Kontenjan")
+            @Html.TextBoxFor(m=>m.MaxParticipant, new { @class = "form-control", type="number" })
+        </div>
+        <div class="mb-3">
+            @Html.Label("Adres")
+            @Html.TextAreaFor(m=>m.Address, new { @class = "form-control", @cols="5" })
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-success">Güncelle</button>
+            <a class="btn btn-danger" href="/Organizer/GetMyEvents">Vazgeç</a>
+        </div>
+    </div>
+}
+@if (ViewBag.message != null)
+{
+    <div class="alert alert-info mt-5">
+        @ViewBag.message
+    </div>
+}

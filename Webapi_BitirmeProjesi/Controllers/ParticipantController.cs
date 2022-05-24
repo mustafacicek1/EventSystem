@@ -8,6 +8,7 @@ using Webapi_BitirmeProjesi.Operations.ParticipantOperations.GetAvaliableCategor
 using Webapi_BitirmeProjesi.Operations.ParticipantOperations.GetAvaliableCities;
 using Webapi_BitirmeProjesi.Operations.ParticipantOperations.GetCanceledEvents;
 using Webapi_BitirmeProjesi.Operations.ParticipantOperations.GetCouldntJoinedEvents;
+using Webapi_BitirmeProjesi.Operations.ParticipantOperations.GetEventDetail;
 using Webapi_BitirmeProjesi.Operations.ParticipantOperations.GetEvents;
 using Webapi_BitirmeProjesi.Operations.ParticipantOperations.GetEventsByCategory;
 using Webapi_BitirmeProjesi.Operations.ParticipantOperations.GetEventsByCity;
@@ -50,6 +51,17 @@ namespace Webapi_BitirmeProjesi.Controllers
         public IActionResult GetCategories()
         {
             GetAvaliableCategoriesQuery query = new GetAvaliableCategoriesQuery(_dbContext);
+            var result = query.Handle();
+            return Ok(result);
+        }
+
+        [HttpGet("events/{id}")]
+        public IActionResult GetEventDetail(int id)
+        {
+            GetEventDetailQuery query = new GetEventDetailQuery(_dbContext);
+            query.EventId = id;
+            GetEventDetailQueryValidator validator = new GetEventDetailQueryValidator();
+            validator.ValidateAndThrow(query);
             var result = query.Handle();
             return Ok(result);
         }
